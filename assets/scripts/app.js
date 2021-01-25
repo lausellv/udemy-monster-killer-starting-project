@@ -27,8 +27,7 @@ let battleLog = [];
 adjustHealthBars(chosenMaxLife);
 
 function writeToLog(ev, val, monsterHealth, playerHealth) {
-    let logEntry;
-    logEntry = {
+    let logEntry = {
         event: ev, // assigning value to key value pairs
         value: val,
         finalMonsterHealth: monsterHealth,
@@ -75,9 +74,11 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
             };
             break;
         default: logEntry = {};  // default is added in case no case is met.
-            battleLog.push(logEntry);
+            
 
     }
+
+    battleLog.push(logEntry);
 }
     // if (ev === LOG_EVENT_PLAYER_ATTACK) {
     //     logEntry.target = 'MONSTER';  // assigning a new key value to logEntry
@@ -237,9 +238,21 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
 
     };
 
-    function printLogHandler() {
-        console.log(battleLog);
+    function printLogHandler() {  
+        
+    //     for (let i = 0; i<battleLog.length; i++){  
+    // console.log(battleLog[i]);
+    // }
+   
+let i = 0;
+    for (const logEntry of battleLog){  // the disadvantage to thsi approach is that you don't get the index number
+        console.log(`#${i}`);
+        for (const key in logEntry){
+            console.log(`${key} => ${logEntry[key]}`);
+        };
+        i++;
     }
+}
 
     attackBtn.addEventListener('click', attackHandler)
     strongAttackBtn.addEventListener('click', strongAttackHandler);
