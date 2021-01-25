@@ -74,7 +74,7 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
                 finalPlayerHealth: playerHealth
             };
             break;
-        default: logEntry = {};
+        default: logEntry = {};  // default is added in case no case is met.
             battleLog.push(logEntry);
 
     }
