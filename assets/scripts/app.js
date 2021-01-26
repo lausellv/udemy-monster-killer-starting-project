@@ -235,7 +235,6 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
             currentMonsterHealth,
             currentPlayerHealth);
         endRound();
-
     };
 
     function printLogHandler() {  
@@ -243,6 +242,13 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
     //     for (let i = 0; i<battleLog.length; i++){  
     // console.log(battleLog[i]);
     // }
+
+//     let j = 0;
+//    do {
+//     console.log (j);
+//     j++;
+//    }
+//     while (j <3);
    
 let i = 0;
     for (const logEntry of battleLog){  // the disadvantage to thsi approach is that you don't get the index number
