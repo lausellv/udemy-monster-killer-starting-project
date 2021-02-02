@@ -22,6 +22,7 @@ let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife; // not a global value bc we will allow the user to set this value
 let hasBonusLife = true;  // holds a boolean value
 let battleLog = [];
+let lastLoggedEntry;
 
 
 adjustHealthBars(chosenMaxLife);
@@ -250,14 +251,22 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
 //    }
 //     while (j <3);
    
+//  using a for of loop the disadvantage to this approach is that you don't get the index number
 let i = 0;
-    for (const logEntry of battleLog){  // the disadvantage to thsi approach is that you don't get the index number
-        console.log(`#${i}`);
-        for (const key in logEntry){
-            console.log(`${key} => ${logEntry[key]}`);
-        };
-        i++;
+
+    for (const logEntry of battleLog){ 
+        if (!lastLoggedEntry && lastLoggedEntry !==0 || lastLoggedEntry < i){
+            console.log(`#${i}`);
+            for (const key in logEntry){  /// for in loop for an object variable
+                console.log(`${key} => ${logEntry[key]}`);    
+        } 
+        lastLoggedEntry = i;
+        break;
+     };
+     i++;
+     
     }
+   
 }
 
     attackBtn.addEventListener('click', attackHandler)
