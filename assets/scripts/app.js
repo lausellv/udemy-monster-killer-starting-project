@@ -27,98 +27,108 @@ let lastLoggedEntry;
 
 adjustHealthBars(chosenMaxLife);
 
-function writeToLog(ev, val, monsterHealth, playerHealth) {
-    let logEntry = {
-        event: ev, // assigning value to key value pairs
-        value: val,
-        finalMonsterHealth: monsterHealth,
-        finalPlayerHealth: playerHealth
-    };
+// writeToLog funct using a switch instead of an if statement
+// function writeToLog(ev, val, monsterHealth, playerHealth) {
+//     let logEntry = {
+//         event: ev, // assigning value to key value pairs
+//         value: val,
+//         finalMonsterHealth: monsterHealth,
+//         finalPlayerHealth: playerHealth
+//     };
 
-    switch (ev) {
-        case LOG_EVENT_PLAYER_ATTACK:
-            logEntry.target = 'MONSTER';
-            break;
-        case LOG_EVENT_PLAYER_STRONG_ATTACK:
-            logEntry = {
-                event: ev, // assigning value to key value pairs
-                value: val,
-                target: 'MONSTER',
-                finalMonsterHealth: monsterHealth,
-                finalPlayerHealth: playerHealth
-            };
-            break;
-        case LOG_EVENT_MONSTER_ATTACK:
-            logEntry = {
-                event: ev, // assigning value to key value pairs
-                value: val,
-                target: 'PLAYER',
-                finalMonsterHealth: monsterHealth,
-                finalPlayerHealth: playerHealth
-            };
-            break;
-        case LOG_EVENT_PLAYER_HEAL:
-            logEntry = {
-                event: ev, // assigning value to key value pairs
-                value: val,
-                target: 'PLAYER',
-                finalMonsterHealth: monsterHealth,
-                finalPlayerHealth: playerHealth
-            };
-            break;
-        case LOG_EVENT_GAME_OVER:
-            logEntry = {
-                event: ev, // assigning value to key value pairs
-                value: val,
-                finalMonsterHealth: monsterHealth,
-                finalPlayerHealth: playerHealth
-            };
-            break;
-        default: logEntry = {};  // default is added in case no case is met.
+//     switch (ev) {
+//         case LOG_EVENT_PLAYER_ATTACK:
+//             logEntry.target = 'MONSTER';
+//             break;
+//         case LOG_EVENT_PLAYER_STRONG_ATTACK:
+//             logEntry = {
+//                 event: ev, // assigning value to key value pairs
+//                 value: val,
+//                 target: 'MONSTER',
+//                 finalMonsterHealth: monsterHealth,
+//                 finalPlayerHealth: playerHealth
+//             };
+//             break;
+//         case LOG_EVENT_MONSTER_ATTACK:
+//             logEntry = {
+//                 event: ev, // assigning value to key value pairs
+//                 value: val,
+//                 target: 'PLAYER',
+//                 finalMonsterHealth: monsterHealth,
+//                 finalPlayerHealth: playerHealth
+//             };
+//             break;
+//         case LOG_EVENT_PLAYER_HEAL:
+//             logEntry = {
+//                 event: ev, // assigning value to key value pairs
+//                 value: val,
+//                 target: 'PLAYER',
+//                 finalMonsterHealth: monsterHealth,
+//                 finalPlayerHealth: playerHealth
+//             };
+//             break;
+//         case LOG_EVENT_GAME_OVER:
+//             logEntry = {
+//                 event: ev, // assigning value to key value pairs
+//                 value: val,
+//                 finalMonsterHealth: monsterHealth,
+//                 finalPlayerHealth: playerHealth
+//             };
+//             break;
+//         default: logEntry = {};  // default is added in case no case is met.
             
 
+//     }
+
+//     battleLog.push(logEntry);
+// }
+
+// writeToLog funct using an if statement
+function writeToLog(ev, val, monsterHealth, playerHealth){
+let logEntry = {
+    event: ev, // assigning value to key value pairs
+    value: val,
+    finalMonsterHealth: monsterHealth,
+    finalPlayerHealth: playerHealth
+};
+     if (ev === LOG_EVENT_PLAYER_ATTACK) {
+        logEntry.target = 'MONSTER';  // assigning a new key value to logEntry
+
+    } else if (ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
+        logEntry = {
+            event: ev, // assigning value to key value pairs
+            value: val,
+            target: 'MONSTER',
+            finalMonsterHealth: monsterHealth,
+            finalPlayerHealth: playerHealth
+        };
+    } else if (ev === LOG_EVENT_MONSTER_ATTACK) {
+        logEntry = {
+            event: ev, // assigning value to key value pairs
+            value: val,
+            target: 'PLAYER',
+            finalMonsterHealth: monsterHealth,
+            finalPlayerHealth: playerHealth
+        };
+    } else if (ev === LOG_EVENT_PLAYER_HEAL) {
+        logEntry = {
+            event: ev, // assigning value to key value pairs
+            value: val,
+            target: 'PLAYER',
+            finalMonsterHealth: monsterHealth,
+            finalPlayerHealth: playerHealth
+        };
+        } else if (ev === LOG_EVENT_GAME_OVER) {
+            logEntry = {
+                event: ev, // assigning value to key value pairs
+                value: val,
+                finalMonsterHealth: monsterHealth,
+                finalPlayerHealth: playerHealth
+            };
+        }
+        battleLog.push(logEntry);
+
     }
-
-    battleLog.push(logEntry);
-}
-    // if (ev === LOG_EVENT_PLAYER_ATTACK) {
-    //     logEntry.target = 'MONSTER';  // assigning a new key value to logEntry
-
-    // } else if (ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
-    //     logEntry = {
-    //         event: ev, // assigning value to key value pairs
-    //         value: val,
-    //         target: 'MONSTER',
-    //         finalMonsterHealth: monsterHealth,
-    //         finalPlayerHealth: playerHealth
-    //     };
-    // } else if (ev === LOG_EVENT_MONSTER_ATTACK) {
-    //     logEntry = {
-    //         event: ev, // assigning value to key value pairs
-    //         value: val,
-    //         target: 'PLAYER',
-    //         finalMonsterHealth: monsterHealth,
-    //         finalPlayerHealth: playerHealth
-    //     };
-    // } else if (ev === LOG_EVENT_PLAYER_HEAL) {
-    //     logEntry = {
-    //         event: ev, // assigning value to key value pairs
-    //         value: val,
-    //         target: 'PLAYER',
-    //         finalMonsterHealth: monsterHealth,
-    //         finalPlayerHealth: playerHealth
-    //     };
-    //     } else if (ev === LOG_EVENT_GAME_OVER) {
-    //         logEntry = {
-    //             event: ev, // assigning value to key value pairs
-    //             value: val,
-    //             finalMonsterHealth: monsterHealth,
-    //             finalPlayerHealth: playerHealth
-    //         };
-    //     }
-    //     battleLog.push(logEntry);
-
-    // }
 
     function reset() {
         currrentMonsterHealth = chosenMaxLife;
