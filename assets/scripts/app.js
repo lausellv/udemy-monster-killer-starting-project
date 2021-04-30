@@ -12,12 +12,18 @@ const LOG_EVENT_MONSTER_ATTACK = 'MONSTER_ATTACK';
 const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL';
 const LOG_EVENT_GAME_OVER = 'GAME_OVER';
 
-const enteredValue = prompt('Maximum life for you and the monster', '100');
 
-let chosenMaxLife = parseInt(enteredValue);
-if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
-    chosenMaxLife = 100;
+function getMaxLifeValues(){
+    const enteredValue = prompt('Maximum life for you and the monster', '100');
+    let parsedValue = parseInt(enteredValue);
+if (isNaN(parsedValue) || parsedValue <= 0) {
+    throw {message: 'Invalid user input not a number'};
+    //chosenMaxLife = 100;
 }
+return parsedValue;
+}
+
+let chosenMaxLife = getMaxLifeValues()
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife; // not a global value bc we will allow the user to set this value
 let hasBonusLife = true;  // holds a boolean value
@@ -250,16 +256,22 @@ let logEntry = {
 
     function printLogHandler() {  
         
-    //     for (let i = 0; i<battleLog.length; i++){  
-    // console.log(battleLog[i]);
-    // }
+      for (let i = 0; i<battleLog.length; i++){  
+     console.log(battleLog[i]);
+     }
 
-//     let j = 0;
-//    do {
-//     console.log (j);
-//     j++;
-//    }
-//     while (j <3);
+  let j = 0;
+  outerWhile: do {
+    console.log ('outer', j);
+    innerFor: for (let k = 0; k<5; k++){ 
+     if (k ===3){
+        break outerWhile;
+       //continue outerWhile;  // will create an infinite loop ; careful with continue
+     }   
+        console.log('inner' , k)
+    }
+    j++;
+ } while (j <3);
    
 //  using a for of loop the disadvantage to this approach is that you don't get the index number
 let i = 0;
